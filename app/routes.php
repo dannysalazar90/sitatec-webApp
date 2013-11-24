@@ -11,7 +11,17 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function(){
+	return Redirect::to('login');
+});
+Route::get('login', 'HomeController@getLogin');
+Route::get('register', 'HomeController@getRegister');
+Route::post('register', 'HomeController@postRegister');
+Route::post('login', 'HomeController@postLogin');
+Route::get('logout', 'HomeController@logout');
+
+Route::group(array('before' => 'auth'), function(){
+	Route::get('admin','AdminController@getIndex');
+	Route::get('usuarios','HomeController@getUsuarios');
+	Route::post('usuarios', 'HomeController@postUsuarios');
 });

@@ -1,7 +1,6 @@
 <?php
 
 class HomeController extends BaseController {
-
 	/*
 	|--------------------------------------------------------------------------
 	| Default Home Controller
@@ -14,6 +13,94 @@ class HomeController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
+	public function getIndex(){
+		return View::make('master');
+	}
+
+	public function getLogin(){
+		return View::make('login');
+	}
+
+	public function postLogin(){
+		$input = Input::all();
+		$rules = array(
+			'login'		=> 'required',
+			'password'	=> 'required'
+			);
+		$v = Validator::make($input, $rules);
+
+		if($v->fails()){
+			return Redirect::to('login')->withErrors($v);
+		}else{
+			$credentials=array(
+				'username'		=> $input['login'],
+				'password'	=> $input['password']
+				);
+			if(Auth::attempt($credentials)){
+				return Redirect::to('admin');
+			}else{
+				return Redirect::to('login');
+			}
+		}
+	}
+
+
+	public function getUsuarios(){
+		$usuarios = User::all();
+		return View::make('usuarios.index', array('usuarios' => $usuarios));
+	}
+
+	public function postUsuarios(){
+        
+        // llamamos a la función de agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = User::agregarUsuario(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('usuarios')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('usuarios')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
+
+	public function getRegister(){
+		return View::make('register');
+	}
+
+	public function postRegister(){
+		$input = Input::all();
+
+		$rules = array(
+			'username' 	=> 'required|unique:users',
+			'email'		=> 'required|unique:users|email',
+			'password'	=> 'required'
+			);
+		$v = Validator::make($input, $rules);
+
+		if($v->passes()){
+			$password = $input['password'];
+			$password = Hash::make($password);
+
+			$user = new User();
+			$user->username = $input['username'];
+			$user->email = $input['email'];
+			$user->password = $password;
+			$user->save();
+
+			return Redirect::to('login');
+		}
+		else{
+			return Redirect::to('register')->withInput()->withErrors($v);
+		}
+	}
+
+	public function logout(){
+		Auth::logout();
+		return Redirect::to('/');
+	}
 
 	public function showWelcome()
 	{
