@@ -26,6 +26,13 @@
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
 				@if(Auth::user())
+				<li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archivos<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Subir Archivo</a></li>
+                    <li><a href="#">Reportes y Busqueda</a></li>
+                  </ul>
+                </li>
 				<li>{{ HTML::link('usuarios', 'Usuarios') }}</li>
 				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Operadores <b class="caret"></b></a>
@@ -44,7 +51,6 @@
                     <li><a href="#">Crear Dia Especial</a></li>
                   </ul>
                 </li>
-                <li>{{ HTML::link('reportes', 'Reportes y Busqueda') }}</li>
 				<li>{{ HTML::link('logout', 'Salir') }}</li>
 				@else
 				<li>{{ HTML::link('login', 'Ingresar') }}</li>

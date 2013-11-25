@@ -65,6 +65,15 @@ class HomeController extends BaseController {
         }
     }
 
+    public function getEditarUsuario($id){
+		$usuario = User::find($id);
+		return View::make('usuarios.editarUsuario', array('usuario' => $usuario));
+	}
+
+	public function postEditarUsuario(){
+		$usuarios = User::all();
+		return View::make('usuarios.editarUsuario', array('usuarios' => $usuarios));
+	}
 
 	public function getRegister(){
 		return View::make('register');

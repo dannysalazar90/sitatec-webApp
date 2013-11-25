@@ -24,4 +24,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('admin','AdminController@getIndex');
 	Route::get('usuarios','HomeController@getUsuarios');
 	Route::post('usuarios', 'HomeController@postUsuarios');
+	Route::get('usuarios/{id}', 'HomeController@getEditarUsuario');
+	Route::post('usuarios/{id}', 'HomeController@postEditarUsuario');
 });

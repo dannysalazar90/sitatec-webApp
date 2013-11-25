@@ -48,11 +48,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             $respuesta['mensaje'] = 'Usuario creado!';
             $respuesta['error']   = false;
             $respuesta['data']    = $usuario;
-        }     
+        }    
         
         return $respuesta; 
   }
-
+  
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
