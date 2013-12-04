@@ -133,31 +133,11 @@ class HomeController extends BaseController {
 			while(!feof($file))
 			{
 				$linea=fgets($file);
-				$resultado=_procesarLinea($linea);
+				$resultado=Validaciones::procesarLinea($linea);
 				$texto=$texto.$resultado. "<br />";
 			}
 			fclose($file);
 		return View::make('files.results',array('texto' => $texto));
-	}
-
-	public static function _procesarLinea($linea){
-		$num_origen;
-		$num_destino;
-		$hora_inicio;
-		$hora_fin;
-
-		$linea=ltrim($linea);
-		$linea=rtrim($linea);
-		if (strlen($linea)!=60) {
-			return "cadena invalida";
-		} else {
-			$num_origen=substr($linea, 0, 9);
-			$num_destino=substr($linea, 10, 19);
-			$hora_inicio=substr($linea, 20, 39);
-			$hora_fin=substr($linea, 40, 59);
-			return "Origen:".$num_origen." Destino:".$num_destino." Hora Inicio:".$hora_inicio." Hora Fin:".$hora_fin;
-		}
-		
 	}
 
 }
