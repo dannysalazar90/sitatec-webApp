@@ -21,7 +21,7 @@
 -->
 	<div class="container">
 		<div class="logo">
-      		<img src="logo.jpg">
+      		<img src="img/logo.jpg">
     	</div>
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
@@ -29,7 +29,7 @@
 				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archivos<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Subir Archivo</a></li>
+                    <li>{{ HTML::link('upload', 'Subir Archivo') }}</li>
                     <li><a href="#">Reportes y Busqueda</a></li>
                   </ul>
                 </li>

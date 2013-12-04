@@ -70,9 +70,9 @@ class HomeController extends BaseController {
 		return View::make('usuarios.editarUsuario', array('usuario' => $usuario));
 	}
 
-	public function postEditarUsuario(){
-		$usuarios = User::all();
-		return View::make('usuarios.editarUsuario', array('usuarios' => $usuarios));
+	public function postEditarUsuario($id){
+		$usuarios = User::Find($id);
+		return View::make('usuarios.editarUsuario', array('usuario' => $usuario));
 	}
 
 	public function getRegister(){
@@ -114,6 +114,50 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{
 		return View::make('hello');
+	}
+
+	public function getFile()
+	{
+		return View::make('files.index');
+	}
+
+	public function postFile()
+	{
+		$texto="";
+		$linea="";
+		$arch=Input::all();
+		$nombre=date("Y-m-dG-i-s");
+		$arch['fileUpload']->move('reports', $nombre);
+		$file = fopen('reports/'.$nombre, "r") or exit("Unable to open file!");
+			//Output a line of the file until the end is reached
+			while(!feof($file))
+			{
+				$linea=fgets($file);
+				$resultado=_procesarLinea($linea);
+				$texto=$texto.$resultado. "<br />";
+			}
+			fclose($file);
+		return View::make('files.results',array('texto' => $texto));
+	}
+
+	public static function _procesarLinea($linea){
+		$num_origen;
+		$num_destino;
+		$hora_inicio;
+		$hora_fin;
+
+		$linea=ltrim($linea);
+		$linea=rtrim($linea);
+		if (strlen($linea)!=60) {
+			return "cadena invalida";
+		} else {
+			$num_origen=substr($linea, 0, 9);
+			$num_destino=substr($linea, 10, 19);
+			$hora_inicio=substr($linea, 20, 39);
+			$hora_fin=substr($linea, 40, 59);
+			return "Origen:".$num_origen." Destino:".$num_destino." Hora Inicio:".$hora_inicio." Hora Fin:".$hora_fin;
+		}
+		
 	}
 
 }

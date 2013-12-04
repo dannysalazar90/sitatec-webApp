@@ -26,4 +26,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('usuarios', 'HomeController@postUsuarios');
 	Route::get('usuarios/{id}', 'HomeController@getEditarUsuario');
 	Route::post('usuarios/{id}', 'HomeController@postEditarUsuario');
+
+	Route::get('upload', 'HomeController@getFile');
+	Route::post('upload', 'HomeController@postFile');
 });
