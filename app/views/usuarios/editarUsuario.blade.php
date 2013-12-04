@@ -16,7 +16,7 @@
     @endif
     <div class="form-group">
       {{Form::label('username', 'Nombre de Usuario:')}}
-      {{Form::text('username', {{$usuario->username}}, array('class'=>'input-xlarge'))}}
+      {{Form::text('username', $usuario->username, array('class'=>'input-xlarge'))}}
     </div>
     @if($errors->has('username'))
     <div class="alert alert-danger">
@@ -28,7 +28,7 @@
 
     <div class="form-group">
       {{Form::label('email', 'Correo Electronico:')}}
-      {{Form::text('email', Input::old('email'), array('class'=>'form-control', 'placeholder'=>'Correo Electronico', 'autocomplete'=>'off'))}}
+      {{Form::text('email', $usuario->email, array('class'=>'form-control', 'placeholder'=>'Correo Electronico', 'autocomplete'=>'off'))}}
     </div>
     @if($errors->has('email'))
     <div class="alert alert-danger">
@@ -53,19 +53,6 @@
     {{Form::submit('Guardar', array('class'=>'btn btn-success'))}}
     {{Form::reset('Borrar todo', array('class'=>'btn btn-default'))}}
   {{Form::close()}}
-
-        <form id="tab">
-            <label>Username</label>
-            <input type="text" value="{{$usuario->username}}" class="input-xlarge">
-            <label>Email</label>
-            <input type="text" value="{{$usuario->email}}" class="input-xlarge">
-            <label>New Password</label>
-        	<input type="password" class="input-xlarge">
-          	<div>
-          		<a href="usuarios/{{$usuario->id}}" class="btn btn-primary">Actualizar</a>
-        	    <button class="btn btn-primary">Update</button>
-        	</div>
-        </form>
       </div>
       <div class="tab-pane fade" id="profile">
     	<form id="tab2">
