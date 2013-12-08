@@ -40,14 +40,14 @@
                     <li>{{ HTML::link('operadores', 'Crear Operador') }}</li>
                     <li class="divider"></li>
                     <li class="nav-header">Operaciones:</li>
-                    <li><a href="#">Asignar Rango a Operador</a></li>
-                    <li><a href="#">Asignar Tarifas a Operador</a></li>
+                    <li>{{ HTML::link('asignarRango', 'Asignar Rango a Operador') }}</li>
+                    <li>{{ HTML::link('asignarTarifa', 'Asignar Tarifa a Operador') }}</li>
                   </ul>
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fechas Especiales <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Crear Fecha Especial</a></li>
+                    <li>{{ HTML::link('asignarFecha', 'Crear Fecha Especial') }}</li>
                     <li><a href="#">Crear Dia Especial</a></li>
                   </ul>
                 </li>

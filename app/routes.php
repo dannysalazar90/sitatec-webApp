@@ -25,19 +25,26 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('usuarios','HomeController@getUsuarios');
 	Route::post('usuarios', 'HomeController@postUsuarios');
-
 	Route::get('usuarios/{id}', 'HomeController@getEditarUsuario');
 	Route::post('usuarios/{id}', 'HomeController@postEditarUsuario');
+	Route::get('usuarios/eliminar/{id}', 'HomeController@getEliminarUsuario');
+
+	Route::get('operadores', 'HomeController@getOperadores');
+	Route::post('operadores', 'HomeController@postOperadores');
+	Route::get('operadores/{id}', 'HomeController@getEditarOperador');
+	Route::post('operadores/{id}', 'HomeController@postEditarOperador');
+	Route::get('operadores/eliminar/{id}', 'HomeController@getEliminarOperador');
 
 	Route::get('upload', 'HomeController@getFile');
 	Route::post('upload', 'HomeController@postFile');
 
-	Route::get('operadores', 'HomeController@getOperadores');
-	Route::post('operadores', 'HomeController@postOperadores');
+	Route::get('asignarRango', 'HomeController@getAsignarRango');
+	Route::post('asignarRango', 'HomeController@postAsignarRango');
 
-	Route::get('operadores/{id}', 'HomeController@getEditarOperador');
-	Route::post('operadores/{id}', 'HomeController@postEditarOperador');
+	Route::get('asignarTarifa', 'HomeController@getAsignarTarifa');
+	Route::post('asignarTarifa', 'HomeController@postAsignarTarifa');
 
-	Route::get('operadores/eliminar/{id}', 'HomeController@getEliminarOperador');
-	Route::get('usuarios/eliminar/{id}', 'HomeController@getEliminarUsuario');
+	Route::get('asignarFecha', 'HomeController@getAsignarFecha');
+	Route::post('asignarFecha', 'HomeController@postAsignarFecha');
+
 });

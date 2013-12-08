@@ -193,4 +193,67 @@ class HomeController extends BaseController {
 		return View::make('files.results',array('texto' => $texto));
 	}
 
+	public function getAsignarRango()
+	{
+		$operadores = Operadore::all();
+		return View::make('operadores.asignarRango', array('operadores' => $operadores));
+	}
+
+	public function postAsignarRango(){
+        
+        // llamamos a la función de agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = Rango::agregarRango(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('asignarRango')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('asignarRango')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
+    public function getAsignarTarifa()
+	{
+		$operadores = Operadore::all();
+		return View::make('operadores.asignarTarifa', array('operadores' => $operadores));
+	}
+
+	public function postAsignarTarifa(){
+        
+        // llamamos a la función de agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = Tarifa::agregarTarifa(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('asignarTarifa')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('asignarTarifa')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
+    public function getAsignarFecha()
+	{
+		$operadores = Operadore::all();
+		return View::make('operadores.asignarFecha', array('operadores' => $operadores));
+	}
+
+	public function postAsignarFecha(){
+        
+        // llamamos a la función def agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = Fecha::agregarFecha(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('asignarFecha')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('asignarFecha')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
 }

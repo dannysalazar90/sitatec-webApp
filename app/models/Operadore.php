@@ -82,10 +82,9 @@ class Operadore extends Eloquent {
 
   public static function eliminarOperador($id){
     $operador=Operadore::find($id);
+    
     $operador->delete();
   }
-
-
 	/**
 	 * Get the unique identifier for the operator.
 	 *
