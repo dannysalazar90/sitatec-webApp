@@ -37,7 +37,7 @@
 				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Operadores <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Crear Operador</a></li>
+                    <li>{{ HTML::link('operadores', 'Crear Operador') }}</li>
                     <li class="divider"></li>
                     <li class="nav-header">Operaciones:</li>
                     <li><a href="#">Asignar Rango a Operador</a></li>

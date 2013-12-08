@@ -16,16 +16,4 @@
         </p>
       {{ Form::close() }}
 </div>
-
-<!--<input id="lefile" type="file" style="display:none">
-<div class="input-append">
-<input id="photoCover" class="input-large" type="text">
-<a class="btn" onclick="$('input[id=lefile]').click();">Browse</a>
-</div>
- 
-<script type="text/javascript">
-$('input[id=lefile]').change(function() {
-$('#photoCover').val($(this).val());
-});
-</script>-->
 @stop

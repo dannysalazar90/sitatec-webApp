@@ -57,7 +57,7 @@
       <div class="tab-pane fade" id="profile">
     	<form id="tab2">
         	<div>
-        	    <p><a href="#" class="btn btn-block btn-danger">Eliminar usuario: {{$usuario->username}}</a></p>
+        	    <p>{{ HTML::link('usuarios/eliminar/'.$usuario->id, 'Eliminar Usuario: '.$usuario->username, array('class'=>'btn btn-block btn-danger')) }}</p>
         	</div>
     	</form>
       </div>

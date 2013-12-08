@@ -44,6 +44,52 @@ class HomeController extends BaseController {
 		}
 	}
 
+	public function getOperadores(){
+		$operadores = Operadore::all();
+		return View::make('operadores.index', array('operadores' => $operadores));
+	}
+
+	public function postOperadores(){
+        
+        // llamamos a la función de agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = Operadore::agregarOperador(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('operadores')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('operadores')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
+    public function getEditarOperador($id){
+		$operador = Operadore::find($id);
+		return View::make('operadores.editarOperador', array('operador' => $operador));
+	}
+
+	public function postEditarOperador(){
+        
+        // llamamos a la función de agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = Operadore::editarOperador(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('operadores')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('operadores')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
+    public function getEliminarOperador($id){
+		$operador=Operadore::eliminarOperador($id);
+		$operadores = Operadore::all();
+		return View::make('operadores.index', array('operadores' => $operadores));
+	}
+
 
 	public function getUsuarios(){
 		$usuarios = User::all();
@@ -73,6 +119,12 @@ class HomeController extends BaseController {
 	public function postEditarUsuario($id){
 		$usuarios = User::Find($id);
 		return View::make('usuarios.editarUsuario', array('usuario' => $usuario));
+	}
+
+	public function getEliminarUsuario($id){
+		$usuario=User::eliminarUsuario($id);
+		$usuarios = User::all();
+		return View::make('usuarios.index', array('usuarios' => $usuarios));
 	}
 
 	public function getRegister(){
@@ -110,12 +162,12 @@ class HomeController extends BaseController {
 		Auth::logout();
 		return Redirect::to('/');
 	}
-
+/*
 	public function showWelcome()
 	{
 		return View::make('hello');
 	}
-
+*/
 	public function getFile()
 	{
 		return View::make('files.index');
@@ -123,10 +175,11 @@ class HomeController extends BaseController {
 
 	public function postFile()
 	{
+		$usuario=Auth::user()->username;
 		$texto="";
 		$linea="";
 		$arch=Input::all();
-		$nombre=date("Y-m-dG-i-s");
+		$nombre=date("Y-m-dG-i-s")."-".$usuario;
 		$arch['fileUpload']->move('reports', $nombre);
 		$file = fopen('reports/'.$nombre, "r") or exit("Unable to open file!");
 			//Output a line of the file until the end is reached

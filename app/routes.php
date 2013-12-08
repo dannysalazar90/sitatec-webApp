@@ -22,11 +22,22 @@ Route::get('logout', 'HomeController@logout');
 
 Route::group(array('before' => 'auth'), function(){
 	Route::get('admin','AdminController@getIndex');
+
 	Route::get('usuarios','HomeController@getUsuarios');
 	Route::post('usuarios', 'HomeController@postUsuarios');
+
 	Route::get('usuarios/{id}', 'HomeController@getEditarUsuario');
 	Route::post('usuarios/{id}', 'HomeController@postEditarUsuario');
 
 	Route::get('upload', 'HomeController@getFile');
 	Route::post('upload', 'HomeController@postFile');
+
+	Route::get('operadores', 'HomeController@getOperadores');
+	Route::post('operadores', 'HomeController@postOperadores');
+
+	Route::get('operadores/{id}', 'HomeController@getEditarOperador');
+	Route::post('operadores/{id}', 'HomeController@postEditarOperador');
+
+	Route::get('operadores/eliminar/{id}', 'HomeController@getEliminarOperador');
+	Route::get('usuarios/eliminar/{id}', 'HomeController@getEliminarUsuario');
 });

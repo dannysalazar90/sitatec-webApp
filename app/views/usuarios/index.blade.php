@@ -52,7 +52,7 @@
 <h3>Usuarios:</h3>
 <div class="list-group">
 	@foreach($usuarios as $usuario)
-	<a href="usuarios/{{$usuario->id}}" class="list-group-item">{{$usuario->username}}</a>
+	<a href="usuarios/{{$usuario->id}}" class="btn btn-info">{{$usuario->username}}</a>
 	@endforeach
 </div>
 
