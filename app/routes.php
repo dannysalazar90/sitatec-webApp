@@ -47,4 +47,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('asignarFecha', 'HomeController@getAsignarFecha');
 	Route::post('asignarFecha', 'HomeController@postAsignarFecha');
 
+	Route::get('asignarDia', 'HomeController@getAsignarDia');
+	Route::post('asignarDia', 'HomeController@postAsignarDia');
+
 });

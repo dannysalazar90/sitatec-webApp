@@ -256,4 +256,26 @@ class HomeController extends BaseController {
         }
     }
 
+    public function getAsignarDia()
+	{
+		$operadores = Operadore::all();
+		return View::make('operadores.asignarDia', array('operadores' => $operadores));
+	}
+
+	public function postAsignarDia(){
+        
+        // llamamos a la función def agregar vendedor en el modelo y le pasamos los datos del formulario 
+        $respuesta = Dia::agregarDia(Input::all());
+        
+        // Dependiendo de la respuesta del modelo 
+        // retornamos los mensajes de error con los datos viejos del formulario 
+        // o un mensaje de éxito de la operación 
+        if ($respuesta['error'] == true){
+            return Redirect::to('asignarDia')->withErrors($respuesta['mensaje'] )->withInput();
+        }else{
+            return Redirect::to('asignarDia')->with('mensaje', $respuesta['mensaje']);
+        }
+    }
+
+
 }

@@ -48,7 +48,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fechas Especiales <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li>{{ HTML::link('asignarFecha', 'Crear Fecha Especial') }}</li>
-                    <li><a href="#">Crear Dia Especial</a></li>
+                    <li>{{ HTML::link('asignarDia', 'Crear Dia Especial') }}</li>
                   </ul>
                 </li>
 				<li>{{ HTML::link('logout', 'Salir') }}</li>

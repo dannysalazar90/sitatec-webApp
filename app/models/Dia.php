@@ -1,21 +1,21 @@
 <?php
 
-class Fecha extends Eloquent{
+class Dia extends Eloquent{
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'fechas';
+    protected $table = 'dias';
 
-    protected $fillable = array('fecha', 'porcentaje', 'operator_id', 'name');
+    protected $fillable = array('dia', 'porcentaje', 'operator_id', 'name');
 
-    public static function agregarFecha($input){
+    public static function agregarDia($input){
         // función que recibe como parámetro la información del formulario para crear el Vendedor
         $datos=array(
-                    'fecha'=>$input['fecha'],
                     'name'=>$input['name'],
+                    'dia'=>$input['dia'],
                     'porcentaje'=>$input['porcentaje'],
                     'operator_id'=>$input['operator_list']
                 );
@@ -24,7 +24,7 @@ class Fecha extends Eloquent{
         
         // Declaramos reglas para validar que el nombre y apellido sean obligatorios y de longitud maxima 100
         $reglas =  array(
-            'fecha' => array('required')
+            'dia' => array('required')
         );
                 
         $validator = Validator::make($input, $reglas);
@@ -38,12 +38,12 @@ class Fecha extends Eloquent{
         }else{
 
             // en caso de cumplir las reglas se crea el objeto Vendedor
-            $fecha = Fecha::create($datos);        
+            $dia = Dia::create($datos);        
             
             // se retorna un mensaje de éxito al controlador
-            $respuesta['mensaje'] = 'Fecha Especial Creada!';
+            $respuesta['mensaje'] = 'Dia Especial Creado!';
             $respuesta['error']   = false;
-            $respuesta['data']    = $fecha;
+            $respuesta['data']    = $dia;
         }    
         
         return $respuesta; 

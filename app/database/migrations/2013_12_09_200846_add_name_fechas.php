@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFechasTable extends Migration {
+class AddNameFechas extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -16,6 +16,7 @@ class CreateFechasTable extends Migration {
         {
             $tabla->increments('id');
             $tabla->string('fecha', 20);
+            $tabla->string('name', 100);
             $tabla->string('porcentaje', 20);
             $tabla->string('operator_id', 5);
             $tabla->timestamps();

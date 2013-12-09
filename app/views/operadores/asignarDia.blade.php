@@ -3,22 +3,22 @@
 @section('content')
 
 <div class="row marketing">
-	<h3>Asignar Fecha Especial a Operador:</h3>
+	<h3>Asignar Dia Especial a Operador:</h3>
 
-	{{ Form::open(array('url' => 'asignarFecha', 'class'=>'form-control', 'role'=> 'form')) }}
+	{{ Form::open(array('url' => 'asignarDia', 'class'=>'form-control', 'role'=> 'form')) }}
 		@if(Session::get('mensaje'))
 		<div class="alert alert-success">{{Session::get('mensaje')}}</div>
 		@endif
-		@if($errors->has('range'))
+		@if($errors->has('dia'))
 		<div class="alert alert-danger">
-			@foreach($errors->get('range') as $error)
+			@foreach($errors->get('dia') as $error)
 				*{{ $error }}</br>
 			@endforeach
 		</div>
 		@endif
 
 		<div class="form-group">
-			{{Form::label('name', 'Nombre de la fecha:')}}
+			{{Form::label('name', 'Nombre del Dia:')}}
 			{{Form::text('name', Input::old('nombre'), array('class'=>'form-control', 'placeholder'=>'Nombre...', 'autocomplete'=>'off'))}}
 		</div>
 		<div class="form-group">
@@ -31,8 +31,16 @@
 		</div>
 
 		<div class="form-group">
-			{{Form::label('fecha', 'Elegir Fecha Especial:')}}
-			<input type="date" class="form-control"  name="fecha" />
+			{{Form::label('day_list', 'Dia Especial:')}}
+			<select class="form-control" name="dia">
+				<option value=1>Lunes</option>
+				<option value=2>Martes</option>
+				<option value=3>Miercoles</option>
+				<option value=4>Jueves</option>
+				<option value=5>Viernes</option>
+				<option value=6>Sabado</option>
+				<option value=7>Domingo</option>
+			</select>
 		</div>
 
 		<div class="form-group">

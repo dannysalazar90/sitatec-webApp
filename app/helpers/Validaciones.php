@@ -16,8 +16,8 @@ class Validaciones
 		} else {
 			$num_origen=substr($linea, 0, 10);
 			$num_destino=substr($linea, 10, 10);
-			$hora_inicio=substr($linea, 20, 18);
-			$hora_fin=substr($linea, 38, 18);
+			$hora_inicio=substr($linea, 20, 20);
+			$hora_fin=substr($linea, 40, 20);
 			$duracion=Validaciones::calcularDuracion($hora_inicio, $hora_fin);
 			return "Origen:".$num_origen." Destino:".$num_destino." Hora Inicio:".$hora_inicio." Hora Fin:".$hora_fin." Duracion: ".$duracion." minutos";
 		}
@@ -45,6 +45,13 @@ class Validaciones
 		$minutos=intval($segundos/60);
 
 		return $minutos;
+	}
+
+	function diaSemana($ano,$mes,$dia)
+	{
+		// 0->domingo	 | 6->sabado
+		$dia= date("w",mktime(0, 0, 0, $mes, $dia, $ano));
+			return $dia;
 	}
 
 }
