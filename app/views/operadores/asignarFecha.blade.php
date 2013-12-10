@@ -36,8 +36,11 @@
 		</div>
 
 		<div class="form-group">
+			<div class="input-group">
 			{{Form::label('porcentaje', 'Porcentaje de Descuento:')}}
 			{{Form::text('porcentaje', Input::old('nombre'), array('class'=>'form-control', 'placeholder'=>'Porcentaje...', 'autocomplete'=>'off'))}}
+  			<span class="input-group-addon">%</span>
+			</div>
 		</div>
 
 		{{Form::submit('Guardar', array('class'=>'btn btn-success'))}}

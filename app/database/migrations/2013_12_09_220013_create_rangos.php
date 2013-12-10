@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRangosTable extends Migration {
+class CreateRangos extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -16,7 +16,7 @@ class CreateRangosTable extends Migration {
         {
             $tabla->increments('id');
             $tabla->string('range', 3)->unique();
-            $tabla->string('operator_id', 5)->unique();
+            $tabla->string('operator_id', 5);
             $tabla->timestamps();
         });
 	}

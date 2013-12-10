@@ -180,16 +180,20 @@ class HomeController extends BaseController {
 		$linea="";
 		$arch=Input::all();
 		$nombre=date("Y-m-dG-i-s")."-".$usuario;
+		$creado=date("Y-m-dG-i-s")."-".$usuario."-Creado";
 		$arch['fileUpload']->move('reports', $nombre);
+		$fp = fopen('reports/'.$creado,"a") or die("Problemas en la creacion");
 		$file = fopen('reports/'.$nombre, "r") or exit("Unable to open file!");
 			//Output a line of the file until the end is reached
 			while(!feof($file))
 			{
 				$linea=fgets($file);
 				$resultado=Validaciones::procesarLinea($linea);
-				$texto=$texto.$resultado. "<br />";
+				$escribir=$resultado."\n";
+				fputs($fp, $escribir);
 			}
 			fclose($file);
+			$texto="Su documento generado esta disponible <a href='reports/".$creado."'>AQUI</a>";
 		return View::make('files.results',array('texto' => $texto));
 	}
 

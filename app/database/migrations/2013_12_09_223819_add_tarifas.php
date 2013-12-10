@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTarifasTable extends Migration {
+class AddTarifas extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -16,8 +16,8 @@ class CreateTarifasTable extends Migration {
         {
             $tabla->increments('id');
             $tabla->string('tarifa', 50);
-            $tabla->string('operator_origen', 5)->unique();
-            $tabla->string('operator_destino', 5)->unique();
+            $tabla->string('operator_origen', 5);
+            $tabla->string('operator_destino', 5);
             $tabla->timestamps();
         });
 	}
