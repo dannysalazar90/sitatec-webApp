@@ -3,7 +3,7 @@
 class Validaciones
 {
 	public static function buscar($filtro, $termino){
-		$resultado=null;
+		$resultado=array();
 		switch ($filtro) {
 			case 'origen':
 				$resultado=DB::table('llamadas')->where('numero_origen','=',$termino)->get();
@@ -17,12 +17,12 @@ class Validaciones
 				$mes=substr($termino, 5, 2);
 				$anio=substr($termino, 0, 4);
 				foreach ($llamadas as $llamada) {
-					$diabd=substr($llamada->fecha_inicio, 8, 2);
-					$mesbd=substr($llamada->fecha_inicio, 5, 2);
-					$aniobd=substr($llamada->fecha_inicio, 0, 4);
-					$fecha=Validaciones::devolverFecha($llamada->fecha_inicio);
+					$fecha=$llamada->fecha_inicio;
+					$diabd=substr($fecha, 10, 2);
+					$mesbd=substr($fecha, 7, 2);
+					$aniobd=substr($fecha, 0, 6);
 					if($diabd==$dia && $mesbd==$mes && $aniobd==$anio)
-						$resultado=$llamada;
+						array_push($resultado, $llamada);
 				}
 				break;
 			case 'duracion':
