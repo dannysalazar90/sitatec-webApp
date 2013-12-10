@@ -22,7 +22,7 @@ class Validaciones
 					$aniobd=substr($llamada->fecha_inicio, 0, 4);
 					$fecha=Validaciones::devolverFecha($llamada->fecha_inicio);
 					if($diabd==$dia && $mesbd==$mes && $aniobd==$anio)
-						$resultado.=$llamada;
+						$resultado=$llamada;
 				}
 				break;
 			case 'duracion':

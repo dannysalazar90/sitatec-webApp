@@ -25,6 +25,23 @@
 		{{Form::submit('Buscar', array('class'=>'btn btn-success'))}}
 		{{Form::reset('Borrar todo', array('class'=>'btn btn-default'))}}
 	{{Form::close()}}
+
+
+	<h3>Reportes Generados:</h3>
+	<?php
+$directorio = opendir("./reports"); //ruta actual
+while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+{
+    if (is_dir($archivo))//verificamos si es o no un directorio
+    {
+         //de ser un directorio lo envolvemos entre corchetes
+    }
+    else
+    {
+        echo "<a href=reports/".$archivo.">".$archivo."<br />";
+    }
+}
+?>
 </div>
 
 @stop
