@@ -35,4 +35,6 @@
 </div>
 @endif
 
+<a href="reportes" class="btn btn-info">Volver</a>
+
 @stop
