@@ -30,7 +30,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archivos<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li>{{ HTML::link('upload', 'Subir Archivo') }}</li>
-                    <li><a href="#">Reportes y Busqueda</a></li>
+                    <li>{{ HTML::link('reportes', 'Reportes y Busqueda') }}</li>
                   </ul>
                 </li>
 				<li>{{ HTML::link('usuarios', 'Usuarios') }}</li>

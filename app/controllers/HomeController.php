@@ -166,8 +166,47 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{
 		return View::make('hello');
+	}*/
+
+	public function getReportes()
+	{
+		$llamadas=Llamada::All();
+		return View::make('reportes.index', array('llamadas' => $llamadas));
 	}
-*/
+
+	public function postReportes(){
+		$input=Input::All();
+		$tipoBusqueda=$input['search'];
+		switch ($tipoBusqueda) {
+			case 1:
+				$buscar="origen";
+				$termino=$input['origen'];
+				break;
+			case 2:
+				$buscar="destino";
+				$termino=$input['destino'];
+				break;
+			case 3:
+				$buscar="fecha";
+				$termino=$input['fecha'];
+				break;
+			case 4:
+				$buscar="duracion";
+				$termino=$input['duracion'];
+				break;
+			case 5:
+				$buscar="valor";
+				$termino=$input['valor'];
+				break;
+			default:
+				# code...
+				break;
+		}
+		$resultados=Validaciones::buscar($buscar, $termino);
+		$enviado=$input['fecha'];
+		return View::make('reportes.results',array('enviado' => $enviado, 'resultados' => $resultados));
+	}
+
 	public function getFile()
 	{
 		return View::make('files.index');
@@ -190,6 +229,7 @@ class HomeController extends BaseController {
 				$linea=fgets($file);
 				$resultado=Validaciones::procesarLinea($linea);
 				$escribir=$resultado."\n";
+				Llamada::agregarLlamada($resultado);
 				fputs($fp, $escribir);
 			}
 			fclose($file);

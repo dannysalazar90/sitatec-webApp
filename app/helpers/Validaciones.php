@@ -2,6 +2,43 @@
  
 class Validaciones
 {
+	public static function buscar($filtro, $termino){
+		$resultado=null;
+		switch ($filtro) {
+			case 'origen':
+				$resultado=DB::table('llamadas')->where('numero_origen','=',$termino)->get();
+				break;
+			case 'destino':
+				$resultado=DB::table('llamadas')->where('numero_destino','=',$termino)->get();
+				break;
+			case 'fecha':
+				$llamadas=Llamada::All();
+				$dia=substr($termino, 8, 2);
+				$mes=substr($termino, 5, 2);
+				$anio=substr($termino, 0, 4);
+				foreach ($llamadas as $llamada) {
+					$diabd=substr($llamada->fecha_inicio, 8, 2);
+					$mesbd=substr($llamada->fecha_inicio, 5, 2);
+					$aniobd=substr($llamada->fecha_inicio, 0, 4);
+					$fecha=Validaciones::devolverFecha($llamada->fecha_inicio);
+					if($diabd==$dia && $mesbd==$mes && $aniobd==$anio)
+						$resultado.=$llamada;
+				}
+				break;
+			case 'duracion':
+				$resultado=DB::table('llamadas')->where('duracion','=',$termino)->get();
+				break;
+			case 'valor':
+				$resultado=DB::table('llamadas')->where('precio','=',$termino)->get();
+				break;
+			
+			default:
+				$resultado=null;
+				break;
+		}
+		return $resultado;
+	}
+
 	public static function procesarLinea($linea){
 		$num_origen;
 		$num_destino;
@@ -11,7 +48,7 @@ class Validaciones
 
 		$linea=ltrim($linea);
 		$linea=rtrim($linea);
-		if (strlen($linea)!=56) {
+		if (strlen($linea)!=60) {
 			return "cadena invalida";
 		} else {
 			$num_origen=substr($linea, 0, 10);
@@ -35,13 +72,15 @@ class Validaciones
 				$operadorDestino=$operadorDestino;
 			}
 
-			$hora_inicio=substr($linea, 20, 18);
-			$hora_fin=substr($linea, 38, 18);
+			$hora_inicio=trim(substr($linea, 20, 20));
+			$hora_fin=trim(substr($linea, 40, 20));
 			$fecha=Validaciones::devolverFecha($hora_inicio);
 			$duracion=Validaciones::calcularDuracion($hora_inicio, $hora_fin);
-
 			$tarifa=Validaciones::calcularTarifa($operadorOrigen, $operadorDestino, $duracion, $hora_inicio);
-
+			$tarifa=str_pad($tarifa, 10, " ", STR_PAD_LEFT);
+			$duracion=str_pad($duracion, 10, " ", STR_PAD_LEFT);
+			$hora_inicio=str_pad($hora_inicio, 20, " ", STR_PAD_LEFT);
+			$hora_fin=str_pad($hora_fin, 20, " ", STR_PAD_LEFT);
 
 			return $num_origen.$num_destino.$hora_inicio.$hora_fin.$duracion.$tarifa;
 		}

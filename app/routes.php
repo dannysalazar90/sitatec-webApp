@@ -50,4 +50,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('asignarDia', 'HomeController@getAsignarDia');
 	Route::post('asignarDia', 'HomeController@postAsignarDia');
 
+	Route::get('reportes', 'HomeController@getReportes');
+	Route::post('reportes', 'HomeController@postReportes');
+
 });
